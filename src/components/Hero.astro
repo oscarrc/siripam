@@ -1,0 +1,98 @@
+---
+import MaskedSignature from "@/assets/maskedSignature.svg";
+---
+
+<section
+  class="relative min-h-dvh bg-gradient-to-b from-black to-midnight flex items-center justify-center"
+>
+  <div
+    class="flex flex-col justify-center items-center px-6 text-center w-full max-w-5xl"
+  >
+    <div class="mb-12 lg:mb-16">
+      <h1
+        class="text-6xl sm:text-8xl lg:text-9xl xl:text-[12rem] font-black text-smoke leading-none tracking-tighter mb-4 hero-glow"
+      >
+        AKUMU
+      </h1>
+      <h2
+        class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight text-smoke/90 leading-none tracking-widest"
+      >
+        GALLERY
+      </h2>
+    </div>
+
+    <div class="max-w-2xl mb-16">
+      <p
+        class="text-lg sm:text-xl lg:text-2xl text-smoke/80 font-light leading-relaxed drop-shadow"
+      >
+        Where nightmares become art, and darkness finds its beauty
+      </p>
+    </div>
+
+    <div class="flex items-center gap-6 mb-16">
+      <MaskedSignature class="w-48 lg:w-64 h-auto text-smoke/80" />
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+      <div class="flex flex-col items-center text-smoke/60">
+        <span class="text-sm mb-2 animate-pulse">SCROLL TO EXPLORE</span>
+        <div class="w-px h-12 bg-gradient-to-b from-smoke/60 to-transparent">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-glow {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function setupMaskPaths(): void {
+    const paths = ["#sig-path1", "#sig-path2", "#sig-path3", "#sig-path4"];
+
+    paths.forEach((pathSelector) => {
+      const path = document.querySelector(pathSelector) as SVGPathElement;
+      if (path && path.getTotalLength) {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = length.toString();
+        path.style.strokeDashoffset = length.toString();
+      }
+    });
+  }
+
+  function animateSignature(): void {
+    const timeline = gsap.timeline();
+
+    timeline
+      .to("#sig-path1", {
+        strokeDashoffset: 0,
+        duration: 1.5,
+        ease: "power2.out",
+      })
+      .to(
+        "#sig-path2",
+        { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" },
+        "-=0.3"
+      )
+      .to(
+        "#sig-path3",
+        { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" },
+        "-=0.2"
+      )
+      .to(
+        "#sig-path4",
+        { strokeDashoffset: 0, duration: 0.3, ease: "power1.out" },
+        "-=0.1"
+      );
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupMaskPaths();
+    setTimeout(animateSignature, 1000);
+  });
+</script>

@@ -1,0 +1,956 @@
+---
+import Header from "@/components/Header.astro";
+import Landing from "@/layouts/Landing.astro";
+import Signature from "@/assets/signature.svg";
+import Hero from "@/components/Hero.astro";
+import ArtistStatement from "@/components/ArtistStatement.astro";
+---
+
+<Landing>
+  <Header />
+  <Hero />
+  <ArtistStatement />
+  <!-- ScrollSmoother wrapper for ultra-smooth scrolling -->
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <!-- Main Hero Section -->
+      <section id="hero" class="fixed inset-0 z-10">
+        <!-- Background Video Animation -->
+        <div id="video-background" class="absolute inset-0 z-0">
+          <div id="frame-container" class="relative w-full h-full">
+            <img
+              id="frame-1"
+              src="/frames/unscreen-001.png"
+              alt="Animation frame 1"
+              class="absolute inset-0 w-full h-full object-cover opacity-100"
+              loading="eager"
+            />
+            {
+              Array.from({ length: 77 }, (_, i) => {
+                const frameNum = String(i + 2).padStart(3, "0");
+                return (
+                  <img
+                    id={`frame-${i + 2}`}
+                    src={`/frames/unscreen-${frameNum}.png`}
+                    alt={`Animation frame ${i + 2}`}
+                    class="absolute inset-0 w-full h-full object-cover opacity-0"
+                    loading="lazy"
+                  />
+                );
+              })
+            }
+          </div>
+
+          <!-- Dynamic overlay that changes with scroll -->
+          <div
+            id="video-overlay"
+            class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 z-10"
+          >
+          </div>
+
+          <!-- Radial gradient overlay for smooth transition -->
+          <div
+            id="radial-overlay"
+            class="absolute inset-0 z-20 opacity-0 pointer-events-none"
+            style="background: radial-gradient(circle at center, transparent 0%, transparent 30%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,1) 100%)"
+          >
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div
+          class="relative z-20 flex flex-col justify-center items-center min-h-screen px-6 text-center"
+        >
+          <!-- Main Title -->
+          <div id="main-title" class="mb-12">
+            <h1
+              id="akumu-text"
+              class="text-8xl lg:text-9xl xl:text-[12rem] font-black text-white leading-none tracking-tighter mb-4"
+            >
+              AKUMU
+            </h1>
+            <h2
+              id="gallery-text"
+              class="text-6xl lg:text-7xl xl:text-8xl font-light text-white/90 leading-none tracking-widest"
+            >
+              GALLERY
+            </h2>
+          </div>
+
+          <!-- Subtitle -->
+          <div id="subtitle" class="max-w-2xl mb-16">
+            <p
+              class="text-xl lg:text-2xl text-white/80 font-light leading-relaxed"
+            >
+              Where nightmares become art, and darkness finds its beauty
+            </p>
+          </div>
+
+          <!-- Artist Signature -->
+          <div id="artist-signature" class="flex items-center gap-6">
+            <span class="text-lg lg:text-xl text-white/60 italic"
+              >Created by</span
+            >
+            <Signature class="w-48 lg:w-64 h-auto text-white/80" />
+          </div>
+
+          <!-- Scroll Indicator -->
+          <div
+            id="scroll-indicator"
+            class="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <div class="flex flex-col items-center text-white/60">
+              <span class="text-sm mb-2 animate-pulse">SCROLL TO EXPLORE</span>
+              <div
+                class="w-px h-12 bg-gradient-to-b from-white/60 to-transparent"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div
+          id="loading-indicator"
+          class="absolute inset-0 z-30 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        >
+          <div class="text-center text-white">
+            <div
+              class="w-16 h-16 border-2 border-white/20 border-t-white rounded-full animate-spin mb-4 mx-auto"
+            >
+            </div>
+            <p class="text-xl font-light">Loading Experience...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scroll trigger element (invisible) -->
+      <div id="scroll-trigger" class="h-[600vh] relative z-0"></div>
+
+      <!-- Gallery Showcase Section -->
+      <section id="gallery-showcase" class="fixed inset-0 z-20 opacity-0">
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black via-midnight to-black"
+        >
+        </div>
+
+        <div
+          class="relative z-10 flex flex-col justify-center items-center min-h-screen px-6 text-center w-full h-full"
+        >
+          <div class="max-w-7xl mx-auto w-full">
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mb-8">
+              Digital Nightmares
+            </h2>
+            <p
+              class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-12"
+            >
+              Step into a world where the unconscious mind meets digital
+              artistry. Each piece tells a story of fears transformed into
+              beauty, darkness illuminated through creativity.
+            </p>
+
+            <!-- Feature Grid -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            >
+              <div
+                class="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10"
+              >
+                <h3 class="text-2xl font-bold text-white mb-4">
+                  Surreal Visions
+                </h3>
+                <p class="text-white/70">
+                  Explore the boundaries between reality and nightmare through
+                  AI-generated masterpieces.
+                </p>
+              </div>
+              <div
+                class="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10"
+              >
+                <h3 class="text-2xl font-bold text-white mb-4">
+                  Dark Aesthetics
+                </h3>
+                <p class="text-white/70">
+                  Immerse yourself in carefully curated collections that
+                  challenge perception.
+                </p>
+              </div>
+              <div
+                class="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10"
+              >
+                <h3 class="text-2xl font-bold text-white mb-4">
+                  Interactive Journey
+                </h3>
+                <p class="text-white/70">
+                  Experience art that responds to your presence and engagement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Artist Statement Section -->
+      <section id="artist-statement" class="fixed inset-0 z-20 opacity-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-black to-midnight">
+        </div>
+        <div
+          class="relative z-10 flex flex-col justify-center items-center min-h-screen px-6 text-center"
+        >
+          <div class="max-w-4xl">
+            <h2 class="text-4xl lg:text-5xl font-light text-white mb-12">
+              "Art is the language of the unconscious,
+              <br />speaking truths we dare not voice."
+            </h2>
+
+            <div class="flex items-center justify-center gap-8 mb-16">
+              <div
+                class="w-24 h-px bg-gradient-to-r from-transparent to-white/30"
+              >
+              </div>
+              <Signature class="w-32 h-auto text-white/60" />
+              <div
+                class="w-24 h-px bg-gradient-to-l from-transparent to-white/30"
+              >
+              </div>
+            </div>
+
+            <p class="text-lg text-white/70 leading-relaxed">
+              Welcome to AKUMU GALLERY, where the depths of imagination meet the
+              cutting edge of digital artistry. Here, nightmares are not
+              something to fear, but stories to be told, emotions to be
+              explored, and beauty to be discovered in the most unexpected
+              places.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Landing>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const frameCount = 78;
+    const frames: HTMLImageElement[] = [];
+    const loadingIndicator = document.getElementById("loading-indicator");
+
+    console.log("Script starting...");
+
+    // Collect all frame elements
+    for (let i = 1; i <= frameCount; i++) {
+      const frame = document.getElementById(`frame-${i}`) as HTMLImageElement;
+      if (frame && frame instanceof HTMLImageElement) {
+        frames.push(frame);
+      }
+    }
+
+    console.log(`Found ${frames.length} frames`);
+
+    if (frames.length === 0) {
+      console.error("No frames found!");
+      return;
+    }
+
+    // Frame animation controller
+    const frameAnimation = {
+      currentFrame: 0,
+      setFrame(newFrame: number) {
+        const targetFrame = Math.round(newFrame);
+        const clampedFrame = Math.max(
+          0,
+          Math.min(targetFrame, frames.length - 1)
+        );
+
+        if (this.currentFrame !== clampedFrame) {
+          if (frames[this.currentFrame]) {
+            frames[this.currentFrame].style.opacity = "0";
+          }
+          if (frames[clampedFrame]) {
+            frames[clampedFrame].style.opacity = "1";
+          }
+          this.currentFrame = clampedFrame;
+          console.log(`Switched to frame ${clampedFrame + 1}`);
+        }
+      },
+    };
+
+    // Set initial frame immediately
+    frameAnimation.setFrame(0);
+
+    // Loading management
+    let loadedImages = 0;
+    const totalImages = frameCount;
+
+    const hideLoadingIndicator = () => {
+      console.log("Hiding loading indicator...");
+      if (loadingIndicator) {
+        gsap.to(loadingIndicator, {
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          onComplete: () => {
+            loadingIndicator.style.display = "none";
+            console.log("Loading complete, initializing animations...");
+            initializeAnimations();
+          },
+        });
+      }
+    };
+
+    frames.forEach((frame, index) => {
+      if (frame.complete && frame.naturalHeight !== 0) {
+        loadedImages++;
+      } else {
+        frame.addEventListener("load", () => {
+          loadedImages++;
+          console.log(`Loaded ${loadedImages}/${totalImages} images`);
+          if (loadedImages === totalImages) {
+            setTimeout(hideLoadingIndicator, 200);
+          }
+        });
+
+        frame.addEventListener("error", () => {
+          console.error(`Failed to load frame ${index + 1}`);
+          loadedImages++;
+          if (loadedImages === totalImages) {
+            setTimeout(hideLoadingIndicator, 200);
+          }
+        });
+      }
+    });
+
+    if (loadedImages === totalImages) {
+      console.log("All images already loaded");
+      setTimeout(hideLoadingIndicator, 200);
+    }
+
+    function initializeAnimations() {
+      console.log("Initializing animations with ScrollSmoother...");
+
+      // Initialize ScrollSmoother for ultra-smooth scrolling
+      const smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 2, // Smooth factor
+        effects: true,
+        smoothTouch: 0.1,
+      });
+
+      console.log("ScrollSmoother initialized:", smoother);
+
+      const heroSection = document.getElementById("hero");
+      const videoBackground = document.getElementById("video-background");
+      const videoOverlay = document.getElementById("video-overlay");
+      const akumuText = document.getElementById("akumu-text");
+      const galleryText = document.getElementById("gallery-text");
+      const subtitle = document.getElementById("subtitle");
+      const artistSignature = document.getElementById("artist-signature");
+      const scrollIndicator = document.getElementById("scroll-indicator");
+      const galleryShowcase = document.getElementById("gallery-showcase");
+      const artistStatement = document.getElementById("artist-statement");
+      const scrollTrigger = document.getElementById("scroll-trigger");
+
+      if (!heroSection || !scrollTrigger) {
+        console.error("Required elements not found!");
+        return;
+      }
+
+      console.log("All elements found, creating pinned animations...");
+
+      // Test frame animation immediately
+      console.log("Testing frame animation...");
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            frameAnimation.setFrame(i * 8);
+            console.log(`Manual test frame: ${i * 8}`);
+          }, i * 100);
+        }
+      }, 500);
+
+      // Pin the hero section and create seamless transitions
+      ScrollTrigger.create({
+        trigger: heroSection,
+        start: "top top",
+        end: "+=600vh", // Even longer scroll distance
+        pin: true, // Pin the hero section
+        scrub: 1,
+        markers: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          console.log(
+            `Pinned scroll progress: ${(progress * 100).toFixed(1)}%`
+          );
+
+          const radialOverlay = document.getElementById("radial-overlay");
+
+          // Phase 1: Video animation (0% to 70% of scroll)
+          if (progress <= 0.7) {
+            const frameProgress = progress / 0.7;
+            const frameNumber = frameProgress * (frameCount - 1);
+            frameAnimation.setFrame(frameNumber);
+            console.log(`Video phase - Frame: ${Math.round(frameNumber)}`);
+
+            // Keep video background fully visible
+            if (videoBackground) {
+              gsap.set(videoBackground, { opacity: 1 });
+            }
+
+            // Gradually fade overlay as video progresses
+            if (videoOverlay) {
+              const overlayOpacity = Math.max(0.1, 1 - frameProgress * 0.8);
+              gsap.set(videoOverlay, { opacity: overlayOpacity });
+            }
+
+            // Keep all hero content visible
+            [
+              akumuText,
+              galleryText,
+              subtitle,
+              artistSignature,
+              scrollIndicator,
+            ].forEach((element) => {
+              if (element) {
+                gsap.set(element, { opacity: 1, scale: 1 });
+              }
+            });
+
+            // Keep radial overlay hidden
+            if (radialOverlay) {
+              gsap.set(radialOverlay, { opacity: 0 });
+            }
+
+            // Ensure other sections are hidden and positioned correctly
+            if (galleryShowcase) {
+              gsap.set(galleryShowcase, {
+                opacity: 0,
+                visibility: "hidden",
+                y: "100vh", // Position gallery below screen
+              });
+            }
+            if (artistStatement) {
+              gsap.set(artistStatement, { opacity: 0, visibility: "hidden" });
+            }
+          }
+
+          // Phase 2: Radial gradient overlay grows (70% to 85% of scroll)
+          else if (progress > 0.7 && progress <= 0.85) {
+            const overlayProgress = (progress - 0.7) / 0.15;
+            console.log(`Radial overlay phase - Progress: ${overlayProgress}`);
+
+            // Keep video visible but start overlay
+            if (videoBackground) {
+              gsap.set(videoBackground, { opacity: 1 });
+            }
+
+            // Hide video overlay to let video show through
+            if (videoOverlay) {
+              gsap.set(videoOverlay, { opacity: 0 });
+            }
+
+            // Grow radial overlay from edges
+            if (radialOverlay) {
+              const overlayOpacity = Math.min(1, overlayProgress * 1.2);
+              // Dynamic radial gradient that grows inward
+              const innerRadius = Math.max(0, 40 - overlayProgress * 40); // shrinks from 40% to 0%
+              const outerRadius = Math.min(100, 60 + overlayProgress * 40); // grows from 60% to 100%
+
+              radialOverlay.style.background = `radial-gradient(circle at center, transparent 0%, transparent ${innerRadius}%, rgba(0,0,0,0.9) ${outerRadius}%, rgba(0,0,0,1) 100%)`;
+              gsap.set(radialOverlay, { opacity: overlayOpacity });
+            }
+
+            // Keep hero content visible but slightly fade
+            [
+              akumuText,
+              galleryText,
+              subtitle,
+              artistSignature,
+              scrollIndicator,
+            ].forEach((element) => {
+              if (element) {
+                const opacity = Math.max(0.3, 1 - overlayProgress * 0.7);
+                gsap.set(element, { opacity: opacity, scale: 1 });
+              }
+            });
+
+            // Keep gallery positioned below
+            if (galleryShowcase) {
+              gsap.set(galleryShowcase, {
+                opacity: 0,
+                visibility: "hidden",
+                y: "100vh",
+              });
+            }
+          }
+
+          // Phase 3: Complete darkness (85% to 87% of scroll)
+          else if (progress > 0.85 && progress <= 0.87) {
+            console.log("Complete darkness phase");
+
+            // Complete radial overlay
+            if (radialOverlay) {
+              radialOverlay.style.background =
+                "radial-gradient(circle at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%)";
+              gsap.set(radialOverlay, { opacity: 1 });
+            }
+
+            // Hide all hero content
+            [
+              akumuText,
+              galleryText,
+              subtitle,
+              artistSignature,
+              scrollIndicator,
+            ].forEach((element) => {
+              if (element) {
+                gsap.set(element, { opacity: 0 });
+              }
+            });
+
+            // Keep gallery positioned below, ready to slide up
+            if (galleryShowcase) {
+              gsap.set(galleryShowcase, {
+                opacity: 1,
+                visibility: "visible",
+                y: "100vh",
+              });
+            }
+          }
+
+          // Phase 4: Gallery slides up (87% to 92% of scroll)
+          else if (progress > 0.87 && progress <= 0.92) {
+            const slideProgress = (progress - 0.87) / 0.05;
+            console.log(`Gallery slide up - Progress: ${slideProgress}`);
+
+            // Keep complete darkness
+            if (radialOverlay) {
+              gsap.set(radialOverlay, { opacity: 1 });
+            }
+
+            // Hide hero completely
+            if (heroSection) {
+              gsap.set(heroSection, { opacity: 0 });
+            }
+
+            // Slide gallery up from bottom
+            if (galleryShowcase) {
+              const yPosition = 100 - slideProgress * 100; // From 100vh to 0vh
+              gsap.set(galleryShowcase, {
+                opacity: 1,
+                visibility: "visible",
+                y: `${yPosition}vh`,
+              });
+            }
+          }
+
+          // Phase 5: Gallery fully visible (92% to 96% of scroll)
+          else if (progress > 0.92 && progress <= 0.96) {
+            console.log("Gallery fully visible phase");
+
+            // Hide hero completely
+            if (heroSection) {
+              gsap.set(heroSection, { opacity: 0 });
+            }
+
+            // Gallery completely visible and positioned
+            if (galleryShowcase) {
+              gsap.set(galleryShowcase, {
+                opacity: 1,
+                visibility: "visible",
+                y: "0vh",
+              });
+            }
+            if (artistStatement) {
+              gsap.set(artistStatement, { opacity: 0, visibility: "hidden" });
+            }
+          }
+
+          // Phase 6: Transition to artist statement (96% to 98% of scroll)
+          else if (progress > 0.96 && progress <= 0.98) {
+            const finalTransition = (progress - 0.96) / 0.02;
+            console.log(
+              `Artist statement transition - Progress: ${finalTransition}`
+            );
+
+            // Fade out gallery
+            if (galleryShowcase) {
+              const galleryOpacity = Math.max(0, 1 - finalTransition * 1.5);
+              gsap.set(galleryShowcase, {
+                opacity: galleryOpacity,
+                visibility: galleryOpacity > 0 ? "visible" : "hidden",
+                y: "0vh",
+              });
+            }
+
+            // Fade in artist statement
+            if (artistStatement) {
+              const artistOpacity = Math.min(1, finalTransition * 1.5);
+              gsap.set(artistStatement, {
+                opacity: artistOpacity,
+                transform: "translateY(0px)",
+                visibility: artistOpacity > 0 ? "visible" : "hidden",
+              });
+            }
+          }
+
+          // Phase 7: Artist statement visible (98% to 100% of scroll)
+          else if (progress > 0.98) {
+            console.log("Artist statement visible phase");
+
+            if (galleryShowcase) {
+              gsap.set(galleryShowcase, { opacity: 0, visibility: "hidden" });
+            }
+            if (artistStatement) {
+              gsap.set(artistStatement, {
+                opacity: 1,
+                transform: "translateY(0px)",
+                visibility: "visible",
+              });
+            }
+          }
+        },
+      });
+
+      console.log(
+        "Pinned animation created with extended timing and video fade-out"
+      );
+      ScrollTrigger.refresh();
+
+      // Check ScrollTrigger status
+      setTimeout(() => {
+        const triggers = ScrollTrigger.getAll();
+        console.log("Active ScrollTriggers:", triggers.length);
+      }, 1000);
+    }
+
+    // Simplified frame test
+    setTimeout(() => {
+      console.log("Testing frame switching...");
+      frameAnimation.setFrame(0);
+      setTimeout(() => frameAnimation.setFrame(20), 1000);
+      setTimeout(() => frameAnimation.setFrame(40), 2000);
+      setTimeout(() => frameAnimation.setFrame(60), 3000);
+    }, 2000);
+  });
+</script>
+
+<style>
+  /* Global cinematic styling */
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+    background: #000;
+    /* Ensure consistent scroll behavior for ScrollSmoother */
+    overscroll-behavior: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ScrollSmoother wrapper styling */
+  #smooth-wrapper {
+    overflow: hidden;
+  }
+
+  #smooth-content {
+    overflow: visible;
+  }
+
+  /* Frame container optimizations */
+  #frame-container img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: opacity;
+    transition: opacity 0.03s ease-out;
+  }
+
+  /* Hero section styling - ensure proper pinning */
+  #hero {
+    position: relative;
+    background: #000;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Video background - improved for fade out */
+  #video-background {
+    will-change: transform, opacity;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  /* Main title styling - improved for pinning */
+  #akumu-text {
+    will-change: transform, opacity;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    transform-origin: center center;
+  }
+
+  #gallery-text {
+    will-change: opacity;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    font-weight: 200;
+    letter-spacing: 0.1em;
+  }
+
+  /* Subtitle styling */
+  #subtitle {
+    will-change: opacity;
+  }
+
+  #subtitle p {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Artist signature styling */
+  #artist-signature {
+    will-change: opacity;
+  }
+
+  /* Scroll indicator animation */
+  #scroll-indicator {
+    animation: float 3s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(-50%, 0px);
+    }
+    50% {
+      transform: translate(-50%, 10px);
+    }
+  }
+
+  /* Loading indicator */
+  #loading-indicator {
+    backdrop-filter: blur(10px);
+  }
+
+  /* Gallery showcase section - ensure proper positioning for slide up */
+  #gallery-showcase {
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allow scrolling through when hidden */
+    will-change: opacity, transform, visibility;
+    visibility: hidden;
+    transform: translateY(100vh); /* Start below screen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30; /* Higher than radial overlay */
+  }
+
+  #gallery-showcase.visible {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  /* Radial overlay styling */
+  #radial-overlay {
+    will-change: opacity, background;
+    transition: opacity 0.1s ease-out;
+    z-index: 25; /* Between video and gallery */
+  }
+
+  #gallery-showcase .grid > div {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  #gallery-showcase .grid > div:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Artist statement section - ensure proper positioning */
+  #artist-statement {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allow scrolling through when hidden */
+    will-change: opacity, transform, visibility;
+    visibility: hidden;
+    transform: translateY(0px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #artist-statement.visible {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  #artist-statement h2 {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  /* Smooth scrolling optimizations for ScrollSmoother */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Video overlay improvements */
+  #video-overlay {
+    will-change: opacity;
+    transition: opacity 0.2s ease-out;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.9) 100%
+    );
+  }
+
+  /* Scroll trigger element - invisible but functional */
+  #scroll-trigger {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Improved performance for pinning with ScrollSmoother */
+  .gsap-pin-spacer {
+    overflow: hidden !important;
+  }
+
+  /* ScrollSmoother performance optimizations */
+  #smooth-wrapper,
+  #smooth-content {
+    will-change: transform;
+  }
+
+  /* Responsive typography */
+  @media (max-width: 768px) {
+    #akumu-text {
+      font-size: 4rem !important;
+    }
+
+    #gallery-text {
+      font-size: 2.5rem !important;
+    }
+
+    #subtitle p {
+      font-size: 1.1rem !important;
+    }
+
+    #gallery-showcase h2 {
+      font-size: 2.5rem !important;
+    }
+
+    #artist-statement h2 {
+      font-size: 2rem !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #akumu-text {
+      font-size: 3rem !important;
+    }
+
+    #gallery-text {
+      font-size: 2rem !important;
+    }
+
+    #main-title {
+      margin-bottom: 2rem !important;
+    }
+
+    #subtitle {
+      margin-bottom: 3rem !important;
+    }
+  }
+
+  /* Parallax and performance optimizations */
+  section {
+    will-change: transform;
+  }
+
+  /* High contrast elements */
+  .text-white {
+    color: #ffffff;
+  }
+
+  .text-white\/90 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text-white\/80 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .text-white\/70 {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .text-white\/60 {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Cinematic glow effects */
+  #main-title {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.1));
+  }
+
+  /* Better focus states */
+  .grid > div {
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Improved loading state */
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Prevent content jumping during pin with ScrollSmoother */
+  body.gsap-scrolltrigger-pin-spacer {
+    overflow: hidden;
+  }
+
+  /* Enhanced performance for video fade transitions */
+  #video-background * {
+    will-change: opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+</style>
