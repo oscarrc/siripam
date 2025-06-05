@@ -1,14 +1,35 @@
 ---
 import Header from "@/components/Header.astro";
 import Landing from "@/layouts/Landing.astro";
-import Hero from "@/components/Hero.astro";
-import ArtistStatement from "@/components/ArtistStatement.astro";
+import Hero from "@/sections/Hero.astro";
+import ArtistStatement from "@/sections/ArtistStatement.astro";
 import Footer from "@/components/Footer.astro";
+import Gallery from "@/sections/Gallery.astro";
 ---
 
 <Landing>
   <Header />
-  <Hero />
-  <ArtistStatement />
-  <Footer />
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main>
+        <Hero />
+        <ArtistStatement />
+        <Gallery />
+      </main>
+      <Footer />
+    </div>
+  </div>
 </Landing>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+  gsap.registerPlugin(ScrollSmoother);
+
+  ScrollSmoother.create({
+    smooth: 1,
+    effects: true,
+    smoothTouch: 1,
+  });
+</script>

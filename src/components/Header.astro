@@ -4,12 +4,16 @@ import Menu from "@/assets/icons/menu.svg";
 ---
 
 <header class="fixed top-0 z-50 w-full" x-data="{ isOpen: false }">
-  <nav class="flex items-center justify-between p-4 z-50 relative">
-    <a href="/" name="Sirikanya Amarananthakij">
-      <Logo class="h-8 w-auto" />
+  <nav class="flex items-center justify-between p-12 z-50 relative">
+    <a
+      href="/"
+      name="Sirikanya Amarananthakij"
+      aria-label="Sirikanya Amaranantakij"
+    >
+      <Logo class="h-12 w-auto" />
     </a>
     <button class="cursor-pointer" x-on:click="isOpen = !isOpen">
-      <Menu class="text-smoke h-8 w-8" />
+      <Menu class="text-smoke h-12 w-12" />
     </button>
   </nav>
   <div

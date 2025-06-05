@@ -1,0 +1,245 @@
+---
+import MaskedSignature from "@/assets/maskedSignature.svg";
+---
+
+<section
+  id="hero"
+  class="relative min-h-dvh bg-gradient-to-b from-black to-midnight flex items-center justify-center"
+>
+  <canvas
+    id="hero-canvas"
+    class="absolute h-full aspect-[1072/1920] opacity-50 mix-blend-luminosity"
+  ></canvas>
+  <div
+    id="hero-content"
+    class="flex flex-col flex-1 gap-16 justify-between items-center px-6 text-center w-full max-w-5xl"
+  >
+    <div class="flex flex-1 flex-col gap-4 items-center" id="title-container">
+      <h1
+        class="text-6xl sm:text-8xl lg:text-9xl xl:text-[12rem] font-black text-smoke leading-none tracking-tighter hero-glow hero-text"
+        id="main-title"
+      >
+        LOREM
+      </h1>
+      <h2
+        class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight text-smoke/90 leading-none tracking-widest hero-text"
+        id="sub-title"
+      >
+        GALLERY
+      </h2>
+    </div>
+
+    <p
+      class="text-lg sm:text-xl max-w-2xl lg:text-2xl text-smoke/80 font-light leading-relaxed drop-shadow hero-text"
+      id="description"
+    >
+      Where nightmares become art, and darkness finds its beauty
+    </p>
+
+    <div class="flex items-center gap-6 mb-16" id="signature-container">
+      <MaskedSignature
+        class="w-48 lg:w-64 h-auto text-smoke/80"
+        id="signature"
+        aria-label="Sirikanya Amaranantakij"
+      />
+    </div>
+  </div>
+  <div
+    class="absolute bottom-20 w-px bg-gradient-to-b from-smoke/60 to-transparent"
+    id="scroll-indicator"
+  >
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const signature = ["#sig-path1", "#sig-path2", "#sig-path3", "#sig-path4"];
+  const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement;
+  const ctx = canvas?.getContext("2d");
+
+  canvas.width = 1072;
+  canvas.height = 1920;
+
+  const video = { frame: 0 };
+  const totalFrames = 85;
+  const frames: HTMLImageElement[] = [];
+
+  const pinDuration = window.innerHeight * 2;
+  const timeline = gsap.timeline({
+    onComplete: () => {
+      gsap.to("#scroll-indicator", {
+        height: 0,
+        y: 48,
+        autoAlpha: 0,
+        ease: "power2.out",
+        transformOrigin: "bottom",
+        scrollTrigger: {
+          start: "top top",
+          end: pinDuration / 4,
+          markers: true,
+          scrub: 1,
+        },
+      });
+    },
+  });
+
+  const renderFrame = () => {
+    if (ctx && frames[video.frame]) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(frames[video.frame], 0, 0);
+    }
+  };
+
+  const loadImages = async () => {
+    const imagePromises = [];
+
+    for (let i = 1; i <= totalFrames; i++) {
+      const promise = new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = `/frames/frame-${i.toString().padStart(3, "0")}.webp`;
+      });
+      imagePromises.push(promise);
+    }
+
+    try {
+      const loadedImages = await Promise.all(imagePromises);
+      frames.push(...loadedImages);
+      renderFrame();
+    } catch (error) {
+      console.error("Error loading images:", error);
+    }
+  };
+
+  loadImages();
+
+  signature.forEach((p) => {
+    const path = document.querySelector(p) as SVGPathElement;
+    if (path && path.getTotalLength) {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = length.toString();
+      path.style.strokeDashoffset = length.toString();
+    }
+  });
+
+  timeline
+    .from("#main-title", {
+      scale: 1.1,
+      ease: "power2.out",
+      autoAlpha: 0,
+      duration: 2,
+      filter: "blur(10px)",
+    })
+    .from(
+      "#sub-title",
+      {
+        scale: 1.1,
+        ease: "power2.out",
+        autoAlpha: 0,
+        duration: 2,
+        filter: "blur(10px)",
+      },
+      "-=2"
+    )
+    .from(
+      "#description",
+      {
+        ease: "power2.out",
+        autoAlpha: 0,
+        duration: 2,
+        filter: "blur(10px)",
+      },
+      "-=2"
+    )
+    .from(
+      "#hero-canvas",
+      {
+        ease: "power2.out",
+        autoAlpha: 0,
+        duration: 1,
+        filter: "blur(10px)",
+      },
+      "-=1.5"
+    )
+    .to(
+      "#sig-path1",
+      {
+        strokeDashoffset: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=1"
+    )
+    .to(
+      "#sig-path2",
+      { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" },
+      "-=0.3"
+    )
+    .to(
+      "#sig-path3",
+      { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" },
+      "-=0.2"
+    )
+    .to(
+      "#sig-path4",
+      { strokeDashoffset: 0, duration: 0.3, ease: "power1.out" },
+      "-=0.1"
+    )
+    .to(
+      "#scroll-indicator",
+      {
+        height: 48,
+        y: 48,
+        duration: 1,
+        ease: "power2.out",
+        transformOrigin: "bottom",
+      },
+      "-=0.1"
+    );
+
+  // SINGLE PIN - Only pin the hero section (NO other pins needed)
+  gsap.set("#hero", { willChange: "transform" });
+  gsap.to("#hero", {
+    scrollTrigger: {
+      trigger: "#hero",
+      start: "top top",
+      end: pinDuration,
+      pin: true,
+      pinSpacing: false,
+    },
+  });
+
+  // HERO CONTENT FADE ANIMATION (NO PIN - it's already pinned with hero)
+  gsap.to("#hero-content", {
+    autoAlpha: 0,
+    filter: "blur(10px)",
+    scale: 1.2,
+    ease: "power2.out",
+    scrollTrigger: {
+      start: "top top",
+      end: pinDuration / 2,
+      scrub: 1,
+    },
+  });
+
+  // VIDEO FRAME ANIMATION
+  gsap.to(video, {
+    scrollTrigger: {
+      trigger: "#hero",
+      start: 0,
+      end: pinDuration / 2,
+      scrub: 0.5,
+    },
+    frame: totalFrames - 1,
+    ease: "none",
+    snap: "frame",
+    onUpdate: renderFrame,
+  });
+
+  renderFrame();
+</script>
