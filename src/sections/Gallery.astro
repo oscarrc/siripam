@@ -1,8 +1,462 @@
 ---
-
+// Gallery section - parallax with pinned text
 ---
 
-<section
-  class="relative min-h-dvh flex items-center justify-center overflow-hidden bg-midnight"
->
+<section id="gallery" class="relative bg-midnight overflow-hidden py-16">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 opacity-5">
+    <div
+      class="absolute top-1/4 left-1/4 w-96 h-96 bg-smoke/10 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-smoke/10 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10">
+    <div class="w-full max-w-7xl mx-auto px-6 lg:px-8">
+      <!-- Parallax Container -->
+      <div class="min-h-screen relative">
+        <!-- Main Content Grid -->
+        <div
+          class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start min-h-screen"
+        >
+          <!-- Left Side - Text Content (Will be pinned) -->
+          <div class="space-y-8 pt-24" id="gallery-content">
+            <div class="space-y-6">
+              <h2
+                class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tight uppercase"
+              >
+                NOCTURNAL<br />VISIONS
+              </h2>
+
+              <p
+                class="text-xl sm:text-2xl text-smoke font-light leading-relaxed"
+              >
+                A meditation on the liminal spaces between consciousness and
+                dreams
+              </p>
+            </div>
+
+            <!-- Collection Details -->
+            <div
+              class="space-y-4 border-l-2 border-smoke/20 pl-6"
+              id="collection-details"
+            >
+              <div class="space-y-2">
+                <h3
+                  class="text-sm font-semibold text-smoke/90 uppercase tracking-wider"
+                >
+                  Collection
+                </h3>
+                <p class="text-smoke/70">Nocturnal Visions Series</p>
+              </div>
+              <div class="space-y-2">
+                <h3
+                  class="text-sm font-semibold text-smoke/90 uppercase tracking-wider"
+                >
+                  Year
+                </h3>
+                <p class="text-smoke/70">2024</p>
+              </div>
+              <div class="space-y-2">
+                <h3
+                  class="text-sm font-semibold text-smoke/90 uppercase tracking-wider"
+                >
+                  Medium
+                </h3>
+                <p class="text-smoke/70">Mixed Media, Digital Manipulation</p>
+              </div>
+              <div class="space-y-2">
+                <h3
+                  class="text-sm font-semibold text-smoke/90 uppercase tracking-wider"
+                >
+                  Pieces
+                </h3>
+                <p class="text-smoke/70">12 Original Works</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side - Image Grid (Will scroll with parallax) -->
+          <div class="space-y-4 pt-24" id="gallery-images">
+            <!-- Main Large Image -->
+            <div
+              class="relative overflow-hidden rounded-lg group"
+              id="main-image"
+            >
+              <div class="aspect-[4/3] bg-black/40">
+                <img
+                  src="https://placehold.co/800x600/1a1a1a/666666?text=MIDNIGHT+REVERIE"
+                  alt="Midnight Reverie - Main artwork"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+                >
+                </div>
+                <div class="absolute bottom-6 left-6">
+                  <h4 class="text-xl font-semibold text-white mb-1">
+                    Midnight Reverie
+                  </h4>
+                  <p class="text-white/70 text-sm">
+                    Lead piece of the collection
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Secondary Images Grid -->
+            <div class="grid grid-cols-2 gap-4 mt-8" id="secondary-images">
+              <div
+                class="relative overflow-hidden rounded-lg group"
+                id="image-2"
+              >
+                <div class="aspect-square bg-black/40">
+                  <img
+                    src="https://placehold.co/400x400/2a2a2a/777777?text=SHADOW+DANCE"
+                    alt="Shadow Dance"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="relative overflow-hidden rounded-lg group"
+                id="image-3"
+              >
+                <div class="aspect-square bg-black/40">
+                  <img
+                    src="https://placehold.co/400x400/1f1f1f/888888?text=SILENT+ECHO"
+                    alt="Silent Echo"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Third Row Images -->
+            <div class="grid grid-cols-2 gap-4 mt-4" id="third-row">
+              <div
+                class="relative overflow-hidden rounded-lg group"
+                id="image-4"
+              >
+                <div class="aspect-[4/3] bg-black/40">
+                  <img
+                    src="https://placehold.co/600x450/252525/999999?text=VOID+WHISPERS"
+                    alt="Void Whispers"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="relative overflow-hidden rounded-lg group"
+                id="image-5"
+              >
+                <div class="aspect-[4/3] bg-black/40">
+                  <img
+                    src="https://placehold.co/600x450/1e1e1e/aaaaaa?text=METAMORPHOSIS"
+                    alt="Metamorphosis"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Image -->
+            <div
+              class="relative overflow-hidden rounded-lg group mt-4"
+              id="image-6"
+            >
+              <div class="aspect-[16/9] bg-black/40">
+                <img
+                  src="https://placehold.co/800x450/2b2b2b/bbbbbb?text=FINAL+DREAM"
+                  alt="Final Dream"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div
+                  class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add("(min-width: 1024px)", () => {});
+  ScrollTrigger.create({
+    trigger: "#gallery",
+    start: "top top",
+    end: "bottom bottom",
+    pin: "#gallery-content",
+    pinSpacing: false,
+  });
+
+  // Text content appears first
+  gsap.fromTo(
+    "#gallery-content",
+    {
+      autoAlpha: 0,
+      y: 80,
+      filter: "blur(10px)",
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 70%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  // Collection details staggered animation
+  gsap.fromTo(
+    "#collection-details > div",
+    {
+      autoAlpha: 0,
+      y: 40,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: "#collection-details",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  // Main image appears second with delay
+  gsap.fromTo(
+    "#main-image",
+    {
+      autoAlpha: 0,
+      y: 100,
+      scale: 0.9,
+      filter: "blur(10px)",
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 50%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  // Secondary images staggered - appear third
+  gsap.fromTo(
+    "#image-2",
+    {
+      autoAlpha: 0,
+      y: 80,
+      scale: 0.9,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 30%",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.3,
+    }
+  );
+
+  gsap.fromTo(
+    "#image-3",
+    {
+      autoAlpha: 0,
+      y: 80,
+      scale: 0.9,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 30%",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.6,
+    }
+  );
+
+  // Third row images
+  gsap.fromTo(
+    "#image-4",
+    {
+      autoAlpha: 0,
+      y: 80,
+      scale: 0.9,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 10%",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.2,
+    }
+  );
+
+  gsap.fromTo(
+    "#image-5",
+    {
+      autoAlpha: 0,
+      y: 80,
+      scale: 0.9,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 10%",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.5,
+    }
+  );
+
+  // Final image appears last
+  gsap.fromTo(
+    "#image-6",
+    {
+      autoAlpha: 0,
+      y: 80,
+      scale: 0.9,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top top",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.8,
+    }
+  );
+
+  // CTA button appears after all images
+  gsap.fromTo(
+    "#gallery-cta",
+    {
+      autoAlpha: 0,
+      y: 50,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top top",
+        toggleActions: "play none none reverse",
+      },
+      delay: 1.5,
+    }
+  );
+
+  // More Collections button animation
+  gsap.fromTo(
+    "#more-collections",
+    {
+      autoAlpha: 0,
+      y: 60,
+    },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#more-collections",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  // Floating background elements
+  gsap.to(".absolute.top-1\\/4", {
+    y: -60,
+    rotation: 45,
+    duration: 25,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  });
+
+  gsap.to(".absolute.bottom-1\\/4", {
+    y: 40,
+    rotation: -30,
+    duration: 30,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+  });
+</script>

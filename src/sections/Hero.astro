@@ -96,8 +96,21 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
         scrollTrigger: {
           start: "top top",
           end: pinDuration / 4,
-          markers: true,
           scrub: 1,
+        },
+      });
+
+      gsap.to("#hero-canvas", {
+        autoAlpha: 0,
+        filter: "blur(10px)",
+        scale: 1.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#statement",
+          start: "top top",
+          end: "bottom center",
+          scrub: 1,
+          markers: true,
         },
       });
     },
@@ -224,7 +237,7 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
     scrollTrigger: {
       trigger: "#hero",
       start: "top top",
-      end: pinDuration,
+      end: pinDuration * 2,
       pin: true,
       pinSpacing: false,
     },
