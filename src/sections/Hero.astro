@@ -8,7 +8,7 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
 >
   <canvas
     id="hero-canvas"
-    class="absolute h-full aspect-[1072/1920] opacity-50 mix-blend-luminosity"
+    class="absolute h-full aspect-[1072/1920] opacity-25 mix-blend-luminosity"
   ></canvas>
   <div
     id="hero-content"
@@ -50,6 +50,22 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
   >
   </div>
 </section>
+
+<style>
+  #hero-canvas {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 5%,
+      rgba(0, 0, 0, 0.8) 15%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 1) 75%,
+      rgba(0, 0, 0, 0.8) 85%,
+      rgba(0, 0, 0, 0.1) 95%,
+      transparent 100%
+    );
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";
