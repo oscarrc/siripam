@@ -13,23 +13,34 @@ import Gallery from "@/sections/Gallery.astro";
     <div id="smooth-content">
       <main>
         <Hero />
-        <ArtistStatement />
+        <ArtistStatement
+          class="bg-gradient-to-b from-60% from-transparent to-midnight"
+        >
+          "Art is the language of the unconscious,
+          <br class="hidden sm:block" />
+          speaking truths we dare not voice."
+        </ArtistStatement>
         <Gallery />
+        <ArtistStatement class="bg-midnight">
+          "Children mirror the world we've built,
+          <br class="hidden sm:block" />
+          reflecting what we choose not to see."
+        </ArtistStatement>
+        <Footer />
       </main>
-      <Footer />
     </div>
   </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+    gsap.registerPlugin(ScrollSmoother);
+
+    ScrollSmoother.create({
+      smooth: 1,
+      effects: true,
+      smoothTouch: 1,
+    });
+  </script>
 </Landing>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollSmoother } from "gsap/ScrollSmoother";
-
-  gsap.registerPlugin(ScrollSmoother);
-
-  ScrollSmoother.create({
-    smooth: 1,
-    effects: true,
-    smoothTouch: 1,
-  });
-</script>
