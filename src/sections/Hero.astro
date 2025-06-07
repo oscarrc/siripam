@@ -8,7 +8,7 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
 >
   <canvas
     id="hero-canvas"
-    class="absolute h-full aspect-[1072/1920] opacity-25 mix-blend-luminosity"
+    class="absolute h-full aspect-[1072/1920] opacity-50 mix-blend-luminosity"
   ></canvas>
   <div
     id="hero-content"
@@ -110,7 +110,6 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
           start: "top top",
           end: "bottom center",
           scrub: 1,
-          markers: true,
         },
       });
     },
@@ -231,7 +230,6 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
       "-=0.1"
     );
 
-  // SINGLE PIN - Only pin the hero section (NO other pins needed)
   gsap.set("#hero", { willChange: "transform" });
   gsap.to("#hero", {
     scrollTrigger: {
@@ -243,7 +241,6 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
     },
   });
 
-  // HERO CONTENT FADE ANIMATION (NO PIN - it's already pinned with hero)
   gsap.to("#hero-content", {
     autoAlpha: 0,
     filter: "blur(10px)",
@@ -256,7 +253,6 @@ import MaskedSignature from "@/assets/maskedSignature.svg";
     },
   });
 
-  // VIDEO FRAME ANIMATION
   gsap.to(video, {
     scrollTrigger: {
       trigger: "#hero",

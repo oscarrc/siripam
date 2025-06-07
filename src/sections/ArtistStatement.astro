@@ -3,12 +3,26 @@ import Signature from "@/assets/signature.svg";
 
 interface Props {
   class?: string;
+  video?: string;
 }
 
-const { class: className = "" }: Props = Astro.props;
+const { class: className = "", video }: Props = Astro.props;
 ---
 
 <section id="statement" class:list={["relative", className]}>
+  {
+    video && (
+      <video
+        class="absolute inset-0 w-full h-full object-cover opacity-20"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src={video} type="video/mp4" />
+      </video>
+    )
+  }
   <div class="h-screen">
     <div
       id="statement-text"
@@ -43,13 +57,13 @@ const { class: className = "" }: Props = Astro.props;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const pinDuration = window.innerHeight * 2;
+  const pinDuration = window.innerHeight * 1.25;
 
-  // This should work - pin the text element during the section scroll
   ScrollTrigger.create({
     trigger: "#statement",
     start: "top top",
-    end: pinDuration * 0.75,
+    end: pinDuration,
     pin: "#statement-text",
+    scrub: true,
   });
 </script>

@@ -5,6 +5,7 @@ import Hero from "@/sections/Hero.astro";
 import ArtistStatement from "@/sections/ArtistStatement.astro";
 import Footer from "@/components/Footer.astro";
 import Gallery from "@/sections/Gallery.astro";
+import video from "@/assets/slums/video.mp4";
 ---
 
 <Landing>
@@ -21,11 +22,12 @@ import Gallery from "@/sections/Gallery.astro";
           speaking truths we dare not voice."
         </ArtistStatement>
         <Gallery />
-        <ArtistStatement class="bg-midnight">
+        <ArtistStatement class="bg-midnight" video={video}>
           "Children mirror the world we've built,
           <br class="hidden sm:block" />
           reflecting what we choose not to see."
         </ArtistStatement>
+        <Gallery />
         <Footer />
       </main>
     </div>

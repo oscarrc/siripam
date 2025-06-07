@@ -109,10 +109,12 @@
             </div>
 
             <!-- Secondary Images Grid -->
-            <div class="grid grid-cols-2 gap-4 mt-8" id="secondary-images">
+            <div class="grid grid-cols-2 gap-4 mt-8 gallery-image">
               <div
-                class="relative overflow-hidden rounded-lg group"
-                id="image-2"
+                class="relative
+              overflow-hidden
+              rounded-lg
+              group"
               >
                 <div class="aspect-square bg-black/40">
                   <img
@@ -127,10 +129,7 @@
                 </div>
               </div>
 
-              <div
-                class="relative overflow-hidden rounded-lg group"
-                id="image-3"
-              >
+              <div class="relative overflow-hidden rounded-lg group">
                 <div class="aspect-square bg-black/40">
                   <img
                     src="https://placehold.co/400x400/1f1f1f/888888?text=SILENT+ECHO"
@@ -146,11 +145,8 @@
             </div>
 
             <!-- Third Row Images -->
-            <div class="grid grid-cols-2 gap-4 mt-4" id="third-row">
-              <div
-                class="relative overflow-hidden rounded-lg group"
-                id="image-4"
-              >
+            <div class="grid grid-cols-2 gap-4 mt-4 gallery-image">
+              <div class="relative overflow-hidden rounded-lg group">
                 <div class="aspect-[4/3] bg-black/40">
                   <img
                     src="https://placehold.co/600x450/252525/999999?text=VOID+WHISPERS"
@@ -164,10 +160,7 @@
                 </div>
               </div>
 
-              <div
-                class="relative overflow-hidden rounded-lg group"
-                id="image-5"
-              >
+              <div class="relative overflow-hidden rounded-lg group">
                 <div class="aspect-[4/3] bg-black/40">
                   <img
                     src="https://placehold.co/600x450/1e1e1e/aaaaaa?text=METAMORPHOSIS"
@@ -184,8 +177,7 @@
 
             <!-- Bottom Image -->
             <div
-              class="relative overflow-hidden rounded-lg group mt-4"
-              id="image-6"
+              class="relative overflow-hidden rounded-lg group mt-4 gallery-image"
             >
               <div class="aspect-[16/9] bg-black/40">
                 <img
@@ -204,259 +196,115 @@
       </div>
     </div>
   </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.matchMedia().add("(min-width: 1024px)", () => {});
+
+    const galleryImages = document.querySelector(
+      "#gallery-images"
+    ) as HTMLElement;
+    const galleryContent = document.querySelector(
+      "#gallery-content"
+    ) as HTMLElement;
+
+    const animationStart = window.innerHeight;
+    const pinDuration =
+      galleryImages.offsetHeight - galleryContent.offsetHeight;
+
+    ScrollTrigger.create({
+      trigger: "#gallery",
+      start: "top top",
+      end: "+=" + pinDuration,
+      pin: "#gallery-content",
+      pinSpacing: false,
+      markers: true,
+    });
+
+    gsap.fromTo(
+      "#gallery-content",
+      {
+        autoAlpha: 0,
+        y: 80,
+        filter: "blur(10px)",
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#gallery",
+          start: "top " + animationStart * 0.7,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#collection-details > div",
+      {
+        autoAlpha: 0,
+        y: 40,
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: "#collection-details",
+          start: "top " + animationStart * 0.8,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      "#main-image",
+      {
+        autoAlpha: 0,
+        y: 100,
+        scale: 0.9,
+        filter: "blur(10px)",
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#gallery",
+          start: "top " + animationStart * 0.5,
+        },
+      }
+    );
+
+    document.querySelectorAll(".gallery-image").forEach((image, index) => {
+      gsap.fromTo(
+        image,
+        {
+          autoAlpha: 0,
+          y: 80,
+          scale: 0.9,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: image,
+            start: "top bottom",
+          },
+        }
+      );
+    });
+  </script>
 </section>
-
-<script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.matchMedia().add("(min-width: 1024px)", () => {});
-  ScrollTrigger.create({
-    trigger: "#gallery",
-    start: "top top",
-    end: "bottom bottom",
-    pin: "#gallery-content",
-    pinSpacing: false,
-  });
-
-  // Text content appears first
-  gsap.fromTo(
-    "#gallery-content",
-    {
-      autoAlpha: 0,
-      y: 80,
-      filter: "blur(10px)",
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      filter: "blur(0px)",
-      duration: 1.5,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 70%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
-
-  // Collection details staggered animation
-  gsap.fromTo(
-    "#collection-details > div",
-    {
-      autoAlpha: 0,
-      y: 40,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: "#collection-details",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
-
-  // Main image appears second with delay
-  gsap.fromTo(
-    "#main-image",
-    {
-      autoAlpha: 0,
-      y: 100,
-      scale: 0.9,
-      filter: "blur(10px)",
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      filter: "blur(0px)",
-      duration: 1.5,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 50%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
-
-  // Secondary images staggered - appear third
-  gsap.fromTo(
-    "#image-2",
-    {
-      autoAlpha: 0,
-      y: 80,
-      scale: 0.9,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 30%",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.3,
-    }
-  );
-
-  gsap.fromTo(
-    "#image-3",
-    {
-      autoAlpha: 0,
-      y: 80,
-      scale: 0.9,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 30%",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.6,
-    }
-  );
-
-  // Third row images
-  gsap.fromTo(
-    "#image-4",
-    {
-      autoAlpha: 0,
-      y: 80,
-      scale: 0.9,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 10%",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.2,
-    }
-  );
-
-  gsap.fromTo(
-    "#image-5",
-    {
-      autoAlpha: 0,
-      y: 80,
-      scale: 0.9,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top 10%",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.5,
-    }
-  );
-
-  // Final image appears last
-  gsap.fromTo(
-    "#image-6",
-    {
-      autoAlpha: 0,
-      y: 80,
-      scale: 0.9,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top top",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.8,
-    }
-  );
-
-  // CTA button appears after all images
-  gsap.fromTo(
-    "#gallery-cta",
-    {
-      autoAlpha: 0,
-      y: 50,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#gallery",
-        start: "top top",
-        toggleActions: "play none none reverse",
-      },
-      delay: 1.5,
-    }
-  );
-
-  // More Collections button animation
-  gsap.fromTo(
-    "#more-collections",
-    {
-      autoAlpha: 0,
-      y: 60,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#more-collections",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
-
-  // Floating background elements
-  gsap.to(".absolute.top-1\\/4", {
-    y: -60,
-    rotation: 45,
-    duration: 25,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
-
-  gsap.to(".absolute.bottom-1\\/4", {
-    y: 40,
-    rotation: -30,
-    duration: 30,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
-</script>
